@@ -8,3 +8,8 @@ class Player(object):
 
     def __repr__(self):
         return f'Poker Player: {self.chips} chips. Cards in the hole: \n{self.hole}'
+
+    def bet(self, amount, pot):
+        self.chips - amount
+        pot + amount
+
