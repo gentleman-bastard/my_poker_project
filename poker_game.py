@@ -10,23 +10,30 @@ deck = Deck()
 
 deck.shuffle()
 
-number_of_players = int(input("How many people will be playing?\n"))
 
-players = {f'Player {x+1}':Player() for x in range(number_of_players)}
+names = ['Ross', 'Stew', 'Alex', 'Johnny']
+
+players = [Player(name) for name in names]
 
 print("the following people will be playing:")
-print(players)
+for player in players:
+    print(player.name)
 
 
-for player_name, player_object in players.items():
-    deck.move_cards(player_object.hole, 2)
-    print(f'{player_name} has:\n {player_object.hole}')
+for player in players:
+    deck.move_cards(player.hole, 2)
+
+for player in players:
+    print(f'{player.name} has:\n {player.hole}')
+
+
+
 
 pot = 0
 
-for player, player_object in players.items():
+for player in players:
     amount = int(input(f"{player}:\nHow much would you like to bet?\n"))
-    player_object.bet(amount, pot)
+    player.bet(amount, pot)
 
 print(f'There is now ${pot} in the pot')
 

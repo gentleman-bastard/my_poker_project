@@ -22,7 +22,7 @@ class Card(object):
         return f'{Card.rank_names[self.rank]} of {Card.suit_names[self.suit]}'
 
 
-class Deck(object):
+class Deck():
     def __init__(self):
         self.cards = []
         for suit in range(4):
