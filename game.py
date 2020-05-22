@@ -4,9 +4,10 @@ import logging
 from typing import List, Set, Dict, Tuple
 import datetime
 from itertools import combinations
+import random
 
 class Game(object):
-    def __init__(self, logger: logging.getLogger(),player_names: List[str], small_blind: int, big_blind: int):
+    def __init__(self, logger: logging.getLogger(), player_names: List[str], small_blind: int, big_blind: int):
         self.logger = logger
         self.flop = []
         self.turn = []
@@ -15,6 +16,10 @@ class Game(object):
         self.deck = Deck()
         self.player_names = player_names
         self.pot = 0
+        self.small_blind = small_blind
+        self.big_blind = big_blind
+        self. turn_count = 0
+        self.dealer_position = 0
 
     @property
     def players(self):
@@ -24,6 +29,17 @@ class Game(object):
     def table_cards(self):
         flop_plus_turn = self.flop.extend(self.turn)
         return flop_plus_turn.extend(self.river)
+
+    @property
+    def small_blind_position(self) -> int:
+        return self.dealer_position+1
+
+    @property
+    def big_blind_position(self) -> int:
+        return self.small_blind_position+1
+
+    def move_blinds(self):
+        self.dealer_position+1
 
     def deal_preflop(self, players):
         """deals 2 pre flop (hole) cards to each player"""
