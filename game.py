@@ -1,14 +1,12 @@
 from cards import Deck
 from player import Player as Player
-import logging
 from typing import List, Set, Dict, Tuple
 import datetime
 from itertools import combinations
 import random
 
 class Game(object):
-    def __init__(self, logger: logging.getLogger(), player_names: List[str], small_blind: int, big_blind: int):
-        self.logger = logger
+    def __init__(self, player_names: List[str], small_blind: int, big_blind: int):
         self.flop = []
         self.turn = []
         self.river = []
@@ -39,7 +37,7 @@ class Game(object):
         return self.small_blind_position+1
 
     def move_blinds(self):
-        self.dealer_position+1
+        self.dealer_position += 1
 
     def deal_preflop(self, players):
         """deals 2 pre flop (hole) cards to each player"""
@@ -50,53 +48,6 @@ class Game(object):
     def deal_table_cards(self, n, dead_n):
         self.deck.move_cards(self.dead, dead_n)
         self.deck.move_cards(self.flop,n)
-
-
-
-
-
-
-
-
-
-logger = logging.getLogger('pokergame')
-logger.setLevel(logging.DEBUG)
-
-deck = Deck()
-
-
-deck.shuffle()
-
-
-names = ['Ross', 'Stew', 'Alex', 'Johnny']
-
-
-
-players = [Player(name) for name in names]
-
-print("the following people will be playing:")
-for player in players:
-    print(player.name)
-
-#TODO: deal one card at a time and circle twice
-logger.debug('dealing hole cards to each player')
-for player in players:
-    deck.move_cards(player.hole, 2)
-
-
-
-for player in players:
-    print(f'{player}')
-
-
-logger.debug('dealing flop')
-
-
-
-
-
-
-
 
 
 
