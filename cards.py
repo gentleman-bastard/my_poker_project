@@ -30,7 +30,7 @@ class Deck():
                 card = Card(suit, rank)
                 self.cards.append(card)
 
-    def __str__(self):
+    def __repr__(self):
         res = []
         for card in self.cards:
             res.append(str(card))
