@@ -14,6 +14,7 @@ class Game(object):
         self.dead = []
         self.deck = Deck()
         self.player_names = player_names
+        self.pot = 0
 
     @property
     def players(self):
@@ -29,6 +30,14 @@ class Game(object):
         for i in range(2):
             for player in players:
                 self.deck.move_cards(player.hole, 1)
+
+    def deal_table_cards(self, n, dead_n):
+        self.deck.move_cards(self.dead, dead_n)
+        self.deck.move_cards(self.flop,n)
+
+
+
+
 
 
 
