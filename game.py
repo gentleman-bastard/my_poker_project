@@ -49,5 +49,13 @@ class Game(object):
         self.deck.move_cards(self.dead, dead_n)
         self.deck.move_cards(self.flop,n)
 
+    def _collect_blinds(self):
+        """invokes the Player method move_chips to move the blinds from the the players chip value to the pot"""
+        # TODO: review blind methodology. Perhaps assign a player to blinds rather than a position
+        small_blind_player = self.players[self.small_blind_position]
+        big_blind_player = self.players[self.big_blind_position]
+        small_blind_player.move_chips(self.small_blind, small_blind_player.chips, self.pot)
+        big_blind_player.move_chips(self.big_blind, big_blind_player.chips, self.pot)
+
 
 
