@@ -2,9 +2,9 @@ from cards import Hand
 
 
 class Player:
-    def __init__(self, name, position, chips=1000):
+    def __init__(self, id, name, chips=1000):
+        self.id = id
         self.name = name
-        self.position = position
         self.chips = chips
         self.hole = Hand()
 
@@ -19,5 +19,8 @@ class Player:
 
     def move_chips(self, amount):
         self.chips -= amount
+
+    def take_chips(self, amount):
+        self.chips += amount
 
 
