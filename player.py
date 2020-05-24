@@ -15,8 +15,7 @@ class Player:
     def __add__(self, other):
         return self.chips + other.chips
 
-    def move_chips(self, amount, target):
+    def move_chips(self, amount):
         self.chips -= amount
-        target += amount
 
 
