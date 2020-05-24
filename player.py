@@ -9,6 +9,12 @@ class Player:
     def __repr__(self):
         return f'{self.name}: {self.chips} chips. Cards in the hole: \n{self.hole}'
 
+    def __sub__(self, other):
+        return self.chips - other.chips
+
+    def __add__(self, other):
+        return self.chips + other.chips
+
     def move_chips(self, amount, source, target):
         source -= amount
         target += amount
