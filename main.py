@@ -1,21 +1,19 @@
 from game import Game
-from logging import getLogger
 
-class GameRunner:
-    def __init__(self, logger = getLogger('PokerGame')):
-        self.logger = logger
 
-    def run(self):
-        n_players = input("How many people will be playing?")
-        player_names = [input("What is your name?") for n in n_players]
 
-        self.logger.debug('instantiating game instance')
-        game = Game(getLogger('game_log'), player_names, 10, 20)
+
+
+def run():
+    n_players = int(input("How many people will be player?\n"))
+    player_names = [input("What is your name?\n") for i in range(n_players)]
+    game = Game(player_names, 10, 20)
+    game.run()
 
 
 
 
 if __name__ == '__main__':
-    GameRunner.run()
+    run()
 
 
