@@ -1,8 +1,10 @@
 from cards import Hand
 
+
 class Player:
-    def __init__(self, name, chips = 1000):
+    def __init__(self, name, position, chips=1000):
         self.name = name
+        self.position = position
         self.chips = chips
         self.hole = Hand()
 
