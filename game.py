@@ -18,25 +18,23 @@ class Game(object):
         self.pot = 0
         self.small_blind = small_blind
         self.big_blind = big_blind
-        self. turn_count = 0
+        self.turn_count = 0
         self.dealer_position = 0
-
+        self.active_game = True
 
     def run(self):
+        while self.active_game:
+            self.logger.debug(f'Small Blind:{self.players[self.small_blind_position].name} \
+                Big Blind:{self.players[self.small_blind_position].name}.')
 
+            self.collect_blinds()
 
-        self.logger.debug(f'Small Blind:{self.players[self.small_blind_position].name} \
-            Big Blind:{self.players[self.small_blind_position].name}.')
+            self.logger.debug(f'Pot now has {self.pot} chips')
 
-        self._collect_blinds()
+            # deal hole cards
+            self.deal_preflop()
 
-        self.logger.debug(f'Pot now has {self.pot} chips')
-
-        # deal hole cards
-        self.deal_preflop()
-
-        self.betting_round()
-
+            self.betting_round()
 
     @property
     def players(self):
@@ -68,7 +66,7 @@ class Game(object):
         self.deck.move_cards(self.dead, dead_n)
         self.deck.move_cards(self.flop,n)
 
-    def _collect_blinds(self):
+    def collect_blinds(self):
         """invokes the Player method move_chips to move the blinds from the the players chip value to the pot"""
         # TODO: review blind methodology. Perhaps assign a player to blinds rather than a position
         small_blind_player = self.players[self.small_blind_position]
@@ -78,13 +76,13 @@ class Game(object):
         self.pot += self.small_blind + self.big_blind
 
     def betting_round(self):
-        #TODO update functionality for folding and checking
+        #TODO update functionality for folding and checking. Improve handling of dealer, sm b and bb positions
         for player in self.players:
-            if self.players.index(player) in (self.dealer_position, self.small_blind_position, self.big_blind_position):
+            if player.position in (self.dealer_position, self.small_blind_position, self.big_blind_position):
                 continue
             action = input(f"{player.name}, what would you like to do?\n")
             if action == "fold":
-                player.hole.move_cards(self.dead)
+                player.hole.move_cards(self.dead, 2)
                 continue
             if action == "bet":
                 bet = int(input(f"{player.name}, how much would you like to bet?\n"))
